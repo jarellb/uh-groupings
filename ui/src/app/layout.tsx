@@ -2,6 +2,7 @@ import './globals.css';
 import { Source_Sans_3 } from 'next/font/google';
 import Navbar from '@/components/layout/navbar/navbar';
 import Footer from '@/components/layout/footer';
+import ErrorBoundary from '@/app/ErrorBoundary';
 import type { Metadata } from 'next';
 
 const sourceSans3 = Source_Sans_3({
@@ -20,13 +21,15 @@ const RootLayout = ({
 }: Readonly<{
     children?: React.ReactNode;
 }>) => (
-    <html lang="en">
-        <body className={sourceSans3.variable}>
-            <Navbar />
-            <main className="h-full 2xl:min-h-[72.3vh]">{children}</main>
-            <Footer />
-        </body>
-    </html>
+        <html lang="en">
+            <body className={sourceSans3.variable}>
+                <Navbar />
+                <ErrorBoundary>
+                <main className="h-full 2xl:min-h-[72.3vh]">{children}</main>
+                </ErrorBoundary>
+                <Footer />
+            </body>
+        </html>
 );
 
 export default RootLayout;
